@@ -4,39 +4,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RegCN</title>
-    <link rel="stylesheet" href="Style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Register_Home</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            /* สีพื้นหลังเรียบง่าย */
+            color: #333;
+            /* สีตัวอักษรที่อ่านง่าย */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            /* จัดให้อยู่กลางหน้าจอ */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* เพิ่มเงาให้ดูมีมิติ */
+            border-radius: 10px;
+            /* ทำให้มุมโค้งมน */
+        }
+
+        .header {
+            text-align: center;
+            font-size: 28px;
+            color: #007bff;
+            /* สีฟ้าแบบมืออาชีพ */
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* ตารางข้อมูล */
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            /* เพิ่มช่องว่างระหว่างแถว */
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+        }
+
+        th {
+            text-align: left;
+            color: #555;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        td {
+            width: 70%;
+        }
+
+        /* อินพุต */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #555;
+            background-color: #f9f9f9;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            /* เปลี่ยนสีกรอบเมื่อโฟกัส */
+            outline: none;
+        }
+
+        /* ปุ่มการส่งข้อมูล */
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+            /* เปลี่ยนสีปุ่มเมื่อ hover */
+        }
+
+        /* เมนูด้านซ้าย */
+        .left-section {
+            display: flex;
+            /* ใช้ flexbox เพื่อให้ลิงก์อยู่ในแถวเดียวกัน */
+            justify-content: center;
+            /* จัดตำแหน่งไปทางซ้าย */
+            gap: 10px;
+            /* กำหนดระยะห่างระหว่างลิงก์ */
+        }
+
+        .left-section a {
+            text-decoration: none;
+            /* ลบเส้นใต้ */
+            color: #007bff;
+            /* สีของลิงก์ */
+            padding: 15px;
+            /* เพิ่มพื้นที่ภายใน */
+            border-radius: 5px;
+            /* ทำมุมให้มน */
+            transition: background-color 0.2s;
+            /* เพิ่มการเปลี่ยนสีพื้นหลังเมื่อชี้ */
+        }
+
+        .left-section a:hover {
+            background-color: #e9ecef;
+            /* เปลี่ยนสีพื้นหลังเมื่อชี้ */
+        }
+    </style>
 </head>
 
 <body>
-    <div class="box">
-        <header style="background-color: lightgray;">
+
+    <div class="container">
+        <!-- ส่วนหัวของฟอร์ม -->
+        <div class="header">
+            ลงทะเบียนนักศึกษา
+        </div>
+
+        <!-- เมนูด้านซ้าย -->
+        <div class="left-section">
             <a href="#">หน้าหลัก</a>
-            <a href="#">ข้อมูลส่วนตัว</a>
-            <a href="#">ขอโควต้ารายวิชา</a>
-        </header>
-        <h1>Home</h1>
-        <h2>Basic Information</h2>
-        <p>
-            NickName : LeeVan <br>
-            My Age : 19 <br>
-            My University ID : 6610685130 <br>
-            Current Education level/Institution : 2nd year in Thammasat university <br>
-            Faculty : Engineering <br>
-            Major : Computer Engineering <br>
-        </p>
+            <a href="#1">ค้นหารายวิชา</a>
+            <a href="#2">ผลการจดทะเบียน</a>
+            <a href="#3">ตารางเรียน</a>
+            {% if user.is_authenticated %}
+            <a class="site-item" href="{% url 'dashboard' %}">{{ user.username }}</a>
+            <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit"
+                    style="background:none; border:none; color: #007bff; cursor: pointer; padding: 15px;">ออกจากระบบ</button>
+            </form>
+            {% else %}
+            <a class="site-item" href="{% url 'login'%}">เข้าสู่ระบบ</a>
+            <a class="site-item" href="{% url 'register' %}">สมัครสมาชิก</a>
+
+            {% endif %}
+        </div>
 
 
+        <!-- ฟอร์มข้อมูลนักศึกษา -->
+        <table>
+            <tr>
+                <th>ชื่อ</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>เลขนักศึกษา</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>ชั้นปี</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>คณะ</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>สาขา</th>
+                <td></td>
+            </tr>
+        </table>
     </div>
-    <footer style="background-color: lightgray;">
-        <a>มีไว้ก่อน</a>
-    </footer>
-
-
 
 </body>
-
 
 </html>
