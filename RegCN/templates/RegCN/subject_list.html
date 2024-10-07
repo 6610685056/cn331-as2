@@ -3,19 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายชื่อวิชาเรียน</title>
+    <title>Subject List</title>
 </head>
 <body>
-    <h1>รายชื่อวิชาเรียน</h1>
-    <ul>
-        {% for subject in subjects %}
-            <li>
-                {{ subject.title }} <!-- แสดงชื่อวิชา -->
-                <a href="{% url 'register_subject' %}?subject_id={{ subject.id }}">ลงทะเบียน</a> <!-- ลิงก์สำหรับลงทะเบียน -->
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>Available Subjects</h1>
 
-    <a href="{% url 'home' %}">กลับไปยังหน้าหลัก</a> <!-- ปุ่มกลับไปยังหน้าหลัก -->
+    <table>
+        <thead>
+            <tr>
+                <th>Subject ID</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Term</th>
+                <th>Available Seats</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ subject.subject_id }}</td>
+                <td>{{ subject.title }}</td>
+                <td>{{ subject.subject_year }}</td>
+                <td>{{ subject.get_subject_term_display }}</td> <!-- ดึงค่าแสดงผลแบบ human-readable จาก choices -->
+                <td>{{ subject.avilable_seat }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

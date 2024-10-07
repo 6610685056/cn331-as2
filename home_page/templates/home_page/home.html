@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Register_Home</title>
     <style>
         body {
@@ -12,12 +13,21 @@
             /* สีพื้นหลังเรียบง่าย */
             color: #333;
             /* สีตัวอักษรที่อ่านง่าย */
+=======
+    <title>Student Registration</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4; /* สีพื้นหลังเรียบง่าย */
+            color: #333; /* สีตัวอักษรที่อ่านง่าย */
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
             margin: 0;
             padding: 0;
         }
 
         .container {
             max-width: 900px;
+<<<<<<< HEAD
             margin: 40px auto;
             /* จัดให้อยู่กลางหน้าจอ */
             padding: 20px;
@@ -26,13 +36,24 @@
             /* เพิ่มเงาให้ดูมีมิติ */
             border-radius: 10px;
             /* ทำให้มุมโค้งมน */
+=======
+            margin: 40px auto; /* จัดให้อยู่กลางหน้าจอ */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ดูมีมิติ */
+            border-radius: 10px; /* ทำให้มุมโค้งมน */
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
         }
 
         .header {
             text-align: center;
             font-size: 28px;
+<<<<<<< HEAD
             color: #007bff;
             /* สีฟ้าแบบมืออาชีพ */
+=======
+            color: #007bff; /* สีฟ้าแบบมืออาชีพ */
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
             margin-bottom: 30px;
             font-weight: 600;
         }
@@ -42,12 +63,19 @@
             width: 100%;
             margin-bottom: 20px;
             border-collapse: separate;
+<<<<<<< HEAD
             border-spacing: 0 10px;
             /* เพิ่มช่องว่างระหว่างแถว */
         }
 
         th,
         td {
+=======
+            border-spacing: 0 10px; /* เพิ่มช่องว่างระหว่างแถว */
+        }
+
+        th, td {
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
             padding: 12px 15px;
         }
 
@@ -63,7 +91,11 @@
         }
 
         /* อินพุต */
+<<<<<<< HEAD
         input[type="text"] {
+=======
+        input[type="text"], input[type="password"] {
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -74,9 +106,14 @@
             transition: border-color 0.2s;
         }
 
+<<<<<<< HEAD
         input[type="text"]:focus {
             border-color: #007bff;
             /* เปลี่ยนสีกรอบเมื่อโฟกัส */
+=======
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #007bff; /* เปลี่ยนสีกรอบเมื่อโฟกัส */
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
             outline: none;
         }
 
@@ -95,12 +132,17 @@
         }
 
         .submit-button:hover {
+<<<<<<< HEAD
             background-color: #0056b3;
             /* เปลี่ยนสีปุ่มเมื่อ hover */
+=======
+            background-color: #0056b3; /* เปลี่ยนสีปุ่มเมื่อ hover */
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
         }
 
         /* เมนูด้านซ้าย */
         .left-section {
+<<<<<<< HEAD
             display: flex;
             /* ใช้ flexbox เพื่อให้ลิงก์อยู่ในแถวเดียวกัน */
             justify-content: center;
@@ -125,11 +167,28 @@
         .left-section a:hover {
             background-color: #e9ecef;
             /* เปลี่ยนสีพื้นหลังเมื่อชี้ */
+=======
+            display: block; /* ทำให้ส่วนนี้เป็น block-level */
+        }
+
+        .left-section a {
+            display: block; /* ทำให้ลิงก์แต่ละอันแสดงในบรรทัดใหม่ */
+            text-decoration: none; /* ลบเส้นใต้ */
+            color: #007bff; /* สีของลิงก์ */
+            padding: 10px; /* เพิ่มพื้นที่ภายใน */
+            border-radius: 5px; /* ทำมุมให้มน */
+            transition: background-color 0.2s; /* เพิ่มการเปลี่ยนสีพื้นหลังเมื่อชี้ */
+            margin-bottom: 0px; /* เพิ่มระยะห่างด้านล่างแต่ละลิงก์ */
+        }
+
+        .left-section a:hover {
+            background-color: #e9ecef; /* เปลี่ยนสีพื้นหลังเมื่อชี้ */
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
         }
     </style>
 </head>
-
 <body>
+<<<<<<< HEAD
 
     <div class="container">
         <!-- ส่วนหัวของฟอร์ม -->
@@ -156,8 +215,28 @@
 
             {% endif %}
         </div>
+=======
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
 
+    <div class="container">
+        <!-- ส่วนหัวของฟอร์ม -->
+        <div class="header">
+            Register Login
+        </div>
+        
+        <!-- ฟอร์มข้อมูลนักศึกษา -->
+        <table>
+            <tr>
+                <th>Username</th>
+                <td><input type="text" name="username" placeholder="Username"></td> <!-- ใช้ name แทน username -->
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password" placeholder="Password"></td> <!-- ใช้ type="password" แทน type="text" -->
+            </tr>
+        </table>
 
+<<<<<<< HEAD
         <!-- ฟอร์มข้อมูลนักศึกษา -->
         <table>
             <tr>
@@ -190,3 +269,16 @@
 </body>
 
 </html>
+=======
+        <div class="left-section">
+            <a href="#">Sign in</a>
+            <a href="#">Forget Password ?</a>
+        </div>
+        
+        <!-- ปุ่มการส่งข้อมูล -->
+        <button class="submit-button">Login</button>
+    </div>
+
+</body>
+</html>
+>>>>>>> 588be38e79aafa017e7a67541e1590ed93643380
