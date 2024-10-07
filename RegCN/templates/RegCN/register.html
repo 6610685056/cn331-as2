@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* สีพื้นหลัง */
+            color: #343a40; /* สีตัวอักษร */
+        }
+
+        /* จัดโครงสร้างกรอบทั้งหมด */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        /* กำหนดความกว้างให้ส่วนต่างๆ ตามสัดส่วนที่ต้องการ */
+        .left-section {
+            width: 30%;
+            border: 1px solid #007bff; /* สีกรอบ */
+            padding: 10px;
+            text-align: left;
+            box-sizing: border-box;
+            background-color: #e9ecef; /* สีพื้นหลังของส่วนนี้ */
+        }
+
+        .right-section {
+            width: 70%;
+            border: 1px solid #007bff; /* สีกรอบ */
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #ffffff; /* สีพื้นหลังของส่วนนี้ */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #007bff; /* สีกรอบของตาราง */
+            padding: 10px;
+        }
+
+        th {
+            text-align: right; /* จัดข้อความใน header ไปทางขวา */
+            width: 30%; /* กำหนดสัดส่วนของ header ให้แคบกว่า */
+            background-color: #007bff; /* สีพื้นหลังของ header */
+            color: white; /* สีตัวอักษรของ header */
+        }
+
+        td {
+            width: 70%; /* กำหนดสัดส่วนของช่องที่กรอกข้อมูลให้กว้างกว่า */
+        }
+
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #007bff; /* สีกรอบของ header */
+            background-color: #007bff; /* สีพื้นหลังของ header */
+            color: white; /* สีตัวอักษรของ header */
+            margin-bottom: 20px; /* เว้นระยะด้านล่าง */
+        }
+
+        /* ปุ่มการส่งข้อมูล */
+        .submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745; /* สีพื้นหลังปุ่ม */
+            color: white; /* สีตัวอักษร */
+            border: none; /* ไม่ให้มีกรอบ */
+            border-radius: 5px; /* ทำมุมปุ่มให้กลม */
+            cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นมือ */
+            font-size: 16px; /* ขนาดตัวอักษร */
+        }
+
+        .submit-button:hover {
+            background-color: #218838; /* เปลี่ยนสีเมื่อชี้เมาส์ไปที่ปุ่ม */
+        }
+
+    </style>
+</head>
+</head>
+<body>
+
+    <!-- ส่วนหัวของฟอร์ม -->
+    <div class="header">
+        ลงทะเบียนนักศึกษา
+    </div>
+
+    <div class="container">
+        <!-- ส่วนซ้าย -->
+        <div class="left-section">
+            <!-- สามารถใส่เมนูหรือข้อมูลเพิ่มเติมในส่วนนี้ -->
+            <p>เมนู</p>
+            <ul>
+                <li>หน้าหลัก</li>
+                <li>ค้นหารายวิชา</li>
+                <li>ผลการจดทะเบียน</li>
+                <li>ตารางเรียน</li>
+            </ul>
+        </div>
+
+        <!-- ส่วนขวา: ฟอร์มข้อมูลนักศึกษา -->
+        <div class="right-section">
+            <table>
+                <tr>
+                    <th>ชื่อ</th>
+                    <td><input type="text" name="name" placeholder="กรอกชื่อ"></td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <td><input type="text" name="student_id" placeholder="กรอก ID"></td>
+                </tr>
+                <tr>
+                    <th>ชั้นปี</th>
+                    <td><input type="text" name="year" placeholder="กรอกชั้นปี"></td>
+                </tr>
+                <tr>
+                    <th>คณะ</th>
+                    <td><input type="text" name="faculty" placeholder="กรอกคณะ"></td>
+                </tr>
+                <tr>
+                    <th>สาขา</th>
+                    <td><input type="text" name="major" placeholder="กรอกสาขา"></td>
+                </tr>
+            </table>
+            <!-- ปุ่มการส่งข้อมูล -->
+            <button class="submit-button">ส่งข้อมูล</button>
+        </div>
+    </div>
+
+</body>
+</html>
