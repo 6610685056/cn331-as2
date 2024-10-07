@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home_page.apps.HomePageConfig',
     'RegCN.apps.RegcnConfig',
+    'app_users.apps.AppUsersConfig',
+    'registration.apps.RegistrationConfig',
 ]
 
 MIDDLEWARE = [
@@ -53,10 +55,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'webReg.urls'
 
+import os
+print(os.path.join(BASE_DIR, 'RegCN/templates'))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'RegCN/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,9 +122,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Auth
+
+LOGIN_REDIRECT_URL = ""

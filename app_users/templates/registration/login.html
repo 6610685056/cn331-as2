@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | RegCN</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body>
+    <div class="box">
+        <header style="background-color: lightgray;">
+            <a href="#">หน้าหลัก</a>
+            <a href="#">ข้อมูลส่วนตัว</a>
+            <a href="#">ขอโควต้ารายวิชา</a>
+        </header>
+        <h1 class="content-title">Log In</h1>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <p>
+                <button class="button button-primary" type="submit">Log in</button>
+            </p>
+        </form>
+    </div>
+    <footer style="background-color: lightgray;">
+        <a>มีไว้ก่อน</a>
+    </footer>
+
+
+
+</body>
+
+
+</html>
