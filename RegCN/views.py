@@ -7,7 +7,7 @@ from django.contrib import messages
 from app_users.models import Student
 
 def subjects(request):
-    return render(request, "RegCN/MySubjects.html")
+    return render(request, "home_page/home.html")
 
 def subject(request, subject_id):
     return HttpResponse("subject ID= " + str(subject_id))

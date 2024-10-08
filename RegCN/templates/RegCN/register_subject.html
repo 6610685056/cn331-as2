@@ -1,20 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Subject</title>
+    <title>Student Registration</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 700px; /* ขนาดที่คงที่ */
+            margin: 40px auto; /* จัดให้อยู่กลางหน้าจอ */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 28px;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+        }
+
+        th {
+            text-align: left;
+            color: #555;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        td {
+            width: 70%;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #555;
+            background-color: #f9f9f9;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .left-section {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .left-section a {
+            text-decoration: none;
+            color: #007bff;
+            padding: 15px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .left-section a:hover {
+            background-color: #e9ecef;
+        }
+
+    </style>
 </head>
-
 <body>
-    <h1>ลงทะเบียนวิชาเรียน</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">ลงทะเบียน</button>
-    </form>
-    <a href="{% url 'dashboard' %}">ไปยัง Dashboard</a>
-</body>
 
+    <div class="container">
+        <!-- ส่วนหัวของฟอร์ม -->
+        <div class="header">
+            ลงทะเบียนวิชาเรียน
+        </div>
+
+        <!-- เมนูด้านซ้าย -->
+        <div class="left-section">
+            <a href="{% url 'home' %}">หน้าหลัก</a>
+        </div>
+
+        <!-- ฟอร์มข้อมูลนักศึกษา -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button">ลงทะเบียน</button>
+        </form>
+
+        <!-- ลิงก์ไปยัง Dashboard -->
+        <div class="left-section">
+            <a href="{% url 'dashboard' %}">ไปยัง Dashboard</a>
+        </div>
+    </div>
+
+</body>
 </html>

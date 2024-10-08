@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-        /* สไตล์ตามที่คุณกำหนด */
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #f4f4f4;
@@ -46,13 +45,14 @@
 
         th {
             text-align: left;
-            color: #555;
+            color: #007bff;
             font-weight: 500;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         td {
-            width: 70%;
+            color: #333;
+            font-size: 16px;
         }
 
         .left-section {
@@ -72,6 +72,62 @@
         .left-section a:hover {
             background-color: #e9ecef;
         }
+
+        h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .subject-info {
+            flex-grow: 1;
+        }
+
+        .subject-actions form {
+            display: inline;
+        }
+
+        .subject-actions button {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .subject-actions button:hover {
+            background-color: #d9363e;
+        }
+
+        .register-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .register-link:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 
@@ -80,6 +136,10 @@
     <div class="container">
         <div class="header">
             Dashboard ของ {{ student.user.username }}
+        </div>
+        
+        <div class="left-section">
+            <a href="{% url 'home' %}">หน้าหลัก</a>
         </div>
 
         {% if student %}
@@ -106,26 +166,32 @@
                 <td>{{ student.major }}</td>
             </tr>
         </table>
+
         <h2>วิชาที่ลงทะเบียนเรียน</h2>
         <ul>
             {% for request in quota_requests %}
             <li>
-                {{ request.subject.title }} ({{ request.subject.subject_year }} Term {{ request.subject.subject_term }})
-                <form action="{% url 'drop_subject' request.subject.subject_id %}" method="POST" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">ถอนวิชา</button>
-                </form>
+                <span class="subject-info">
+                    {{ request.subject.title }} ({{ request.subject.subject_year }} Term {{ request.subject.subject_term }})
+                </span>
+                <span class="subject-actions">
+                    <form action="{% url 'drop_subject' request.subject.subject_id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">ถอนวิชา</button>
+                    </form>
+                </span>
             </li>
             {% empty %}
             <li>ยังไม่ได้ลงทะเบียนวิชาใดๆ</li>
             {% endfor %}
         </ul>
 
-        <a href="{% url 'register_subject' %}">ลงทะเบียนวิชาใหม่</a>
+        <a href="{% url 'register_subject' %}" class="register-link">ลงทะเบียนวิชาใหม่</a>
         {% else %}
         <p>ไม่พบข้อมูลนักเรียนในระบบ</p>
         {% endif %}
     </div>
+
 </body>
 
 </html>

@@ -142,6 +142,9 @@
             {% csrf_token %}
             {{ from.as_p }}
 
+            <div class="left-section">
+                <a href="{% url 'home' %}">หน้าหลัก</a>
+            </div>
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             <table>
                 <tr>
@@ -156,7 +159,7 @@
             </table>
 
             <div class="left-section">
-                <a href="#">Sign in</a>
+                <a class="site-item" href="{% url 'register' %}">sing up</a>
                 <a href="#">Forget Password ?</a>
             </div>
 

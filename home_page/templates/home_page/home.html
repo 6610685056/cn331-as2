@@ -134,15 +134,12 @@
     <div class="container">
         <!-- ส่วนหัวของฟอร์ม -->
         <div class="header">
-            ลงทะเบียนนักศึกษา
+            Welcome {{user.username}}
         </div>
 
         <!-- เมนูด้านซ้าย -->
         <div class="left-section">
-            <a href="#">หน้าหลัก</a>
-            <a href="#1">ค้นหารายวิชา</a>
-            <a href="#2">ผลการจดทะเบียน</a>
-            <a href="#3">ตารางเรียน</a>
+            <a href="{% url 'home' %}">หน้าหลัก</a>
             {% if user.is_authenticated %}
             <a class="site-item" href="{% url 'dashboard' %}">{{ user.username }}</a>
             <form method="POST" action="{% url 'logout' %}" style="display:inline;">
@@ -156,34 +153,6 @@
 
             {% endif %}
         </div>
-
-        <!-- ฟอร์มข้อมูลนักศึกษา -->
-        <table>
-            <tr>
-                <th>ชื่อ</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>เลขนักศึกษา</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>ชั้นปี</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>คณะ</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>สาขา</th>
-                <td></td>
-            </tr>
-        </table>
     </div>
 
 </body>
