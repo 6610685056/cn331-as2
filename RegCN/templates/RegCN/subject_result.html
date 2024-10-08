@@ -79,39 +79,24 @@
 
     <div class="container">
         <div class="header">
-            Dashboard ของ {{ student.user.username }}
+            รายวิชา ของ {{ student.user.username }}
         </div>
 
-        {% if student %}
-        <!-- ฟอร์มข้อมูลนักศึกษา -->
-        <table>
-            <tr>
-                <th>ชื่อ</th>
-                <td>{{ student.first_name }} {{ student.last_name }}</td>
-            </tr>
-            <tr>
-                <th>เลขนักศึกษา</th>
-                <td>{{ student.student_id }}</td>
-            </tr>
-            <tr>
-                <th>ชั้นปี</th>
-                <td>{{ student.year_level }}</td>
-            </tr>
-            <tr>
-                <th>คณะ</th>
-                <td>{{ student.faculty }}</td>
-            </tr>
-            <tr>
-                <th>สาขา</th>
-                <td>{{ student.major }}</td>
-            </tr>
-        </table>
         <h2>วิชาที่ลงทะเบียนเรียน</h2>
+        <ul>
+            {% for request in quota_requests %}
+            <li>{{ request.subject.title }} ({{ request.subject.subject_year }} Term {{ request.subject.subject_term }})
+            </li>
+            {% empty %}
+            <li>ยังไม่ได้ลงทะเบียนวิชาใดๆ</li>
+            {% endfor %}
+        </ul>
         <ul>
             {% for request in quota_requests %}
             <li>
                 {{ request.subject.title }} ({{ request.subject.subject_year }} Term {{ request.subject.subject_term }})
-                <form action="{% url 'drop_subject' request.subject.subject_id %}" method="POST" style="display:inline;">
+                <form action="{% url 'drop_subject' request.subject.subject_id %}" method="POST"
+                    style="display:inline;">
                     {% csrf_token %}
                     <button type="submit">ถอนวิชา</button>
                 </form>
@@ -120,7 +105,6 @@
             <li>ยังไม่ได้ลงทะเบียนวิชาใดๆ</li>
             {% endfor %}
         </ul>
-
         <a href="{% url 'register_subject' %}">ลงทะเบียนวิชาใหม่</a>
         {% else %}
         <p>ไม่พบข้อมูลนักเรียนในระบบ</p>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ยืนยันการถอนวิชา</title>
+</head>
+<body>
+    <h1>ยืนยันการถอนวิชา</h1>
+    <p>คุณแน่ใจหรือไม่ว่าต้องการถอนวิชา "{{ subject.title }}"?</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">ยืนยันถอนวิชา</button>
+    </form>
+    
+    <a href="{% url 'dashboard' %}">กลับไปที่ Dashboard</a>
+</body>
+</html>
