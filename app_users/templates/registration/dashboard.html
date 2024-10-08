@@ -137,9 +137,10 @@
         <div class="header">
             Dashboard ของ {{ student.user.username }}
         </div>
-        
+
         <div class="left-section">
             <a href="{% url 'home' %}">หน้าหลัก</a>
+            <a href="{% url 'subject_list' %}" class="btn">รายวิชาทั้งหมด</a>
         </div>
 
         {% if student %}

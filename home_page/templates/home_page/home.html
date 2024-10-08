@@ -140,6 +140,7 @@
         <!-- เมนูด้านซ้าย -->
         <div class="left-section">
             <a href="{% url 'home' %}">หน้าหลัก</a>
+            <a href="{% url 'subject_list' %}" class="btn">รายวิชาทั้งหมด</a>
             {% if user.is_authenticated %}
             <a class="site-item" href="{% url 'dashboard' %}">{{ user.username }}</a>
             <form method="POST" action="{% url 'logout' %}" style="display:inline;">
@@ -154,7 +155,6 @@
             {% endif %}
         </div>
     </div>
-
 </body>
 
 </html>

@@ -4,9 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subject List</title>
+    <style>
+        .left-section {
+            display: block;
+            /* ทำให้ส่วนนี้เป็น block-level */
+        }
+
+        .left-section a {
+            display: block;
+            /* ทำให้ลิงก์แต่ละอันแสดงในบรรทัดใหม่ */
+            text-decoration: none;
+            /* ลบเส้นใต้ */
+            color: #007bff;
+            /* สีของลิงก์ */
+            padding: 10px;
+            /* เพิ่มพื้นที่ภายใน */
+            border-radius: 5px;
+            /* ทำมุมให้มน */
+            transition: background-color 0.2s;
+            /* เพิ่มการเปลี่ยนสีพื้นหลังเมื่อชี้ */
+            margin-bottom: 0px;
+            /* เพิ่มระยะห่างด้านล่างแต่ละลิงก์ */
+        }
+
+        .left-section a:hover {
+            background-color: #e9ecef;
+            /* เปลี่ยนสีพื้นหลังเมื่อชี้ */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table thead {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            table thead {
+                display: none;
+            }
+
+            table tr {
+                margin-bottom: 10px;
+            }
+
+            table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 10px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Available Subjects</h1>
+    <h1>ผลการจดทะเบียน</h1>
+
+    <div class="left-section">
+        <a href="{% url 'home' %}">หน้าหลัก</a>
+        <a href="{% url 'dashboard' %}">ไปยัง Dashboard</a>
+        <a href="{% url 'register_subject' %}">ลงทะเบียนวิชาใหม่</a>
+    </div>
 
     <table>
         <thead>
@@ -15,17 +119,17 @@
                 <th>Title</th>
                 <th>Year</th>
                 <th>Term</th>
-                <th>Available Seats</th>
+                <th>จำนวนที่นั่งหมด</th>
             </tr>
         </thead>
         <tbody>
             {% for subject in subjects %}
             <tr>
-                <td>{{ subject.subject_id }}</td>
-                <td>{{ subject.title }}</td>
-                <td>{{ subject.subject_year }}</td>
-                <td>{{ subject.get_subject_term_display }}</td> <!-- ดึงค่าแสดงผลแบบ human-readable จาก choices -->
-                <td>{{ subject.avilable_seat }}</td>
+                <td data-label="Subject ID">{{ subject.subject_id }}</td>
+                <td data-label="Title">{{ subject.title }}</td>
+                <td data-label="Year">{{ subject.subject_year }}</td>
+                <td data-label="Term">{{ subject.get_subject_term_display }}</td>
+                <td data-label="Available Seats">{{ subject.avilable_seat }}</td>
             </tr>
             {% endfor %}
         </tbody>
