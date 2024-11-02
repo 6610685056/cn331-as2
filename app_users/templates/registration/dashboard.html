@@ -137,9 +137,9 @@
         <div class="header">
             Dashboard ของ {{ student.user.username }}
         </div>
-        
+
         <div class="left-section">
-            <a href="{% url 'home' %}">หน้าหลัก</a>
+            <a href="{% url 'home_page:home' %}">หน้าหลัก</a>
         </div>
 
         {% if student %}
@@ -172,7 +172,8 @@
             {% for request in quota_requests %}
             <li>
                 <span class="subject-info">
-                    {{ request.subject.title }} ({{ request.subject.subject_year }} Term {{ request.subject.subject_term }})
+                    {{ request.subject.title }} ({{ request.subject.subject_year }} Term {{ request.subject.subject_term
+                    }})
                 </span>
                 <span class="subject-actions">
                     <form action="{% url 'drop_subject' request.subject.subject_id %}" method="POST">

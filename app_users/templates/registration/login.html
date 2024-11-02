@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -129,6 +130,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -143,7 +145,7 @@
             {{ from.as_p }}
 
             <div class="left-section">
-                <a href="{% url 'home' %}">หน้าหลัก</a>
+                <a href="{% url 'home_page:home' %}">หน้าหลัก</a>
             </div>
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             <table>

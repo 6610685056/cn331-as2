@@ -31,7 +31,9 @@ class Subject(models.Model):
 
 
 class QuotaRequest(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE)  # นักเรียนที่ขอโควต้า
+    student = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True
+    )  # นักเรียนที่ขอโควต้า
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)  # วิชาที่ต้องการขอโควต้า
     request_date = models.DateTimeField(auto_now_add=True)  # วันที่ขอ
     approved = models.BooleanField(default=False)  # อนุมัติหรือไม่
