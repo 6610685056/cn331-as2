@@ -142,7 +142,10 @@
         <!-- ฟอร์มข้อมูลนักศึกษา -->
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            {{ from.as_p }}
+            {{ form.as_p }}
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
 
             <div class="left-section">
                 <a href="{% url 'home_page:home' %}">หน้าหลัก</a>
@@ -161,12 +164,13 @@
             </table>
 
             <div class="left-section">
-                <a class="site-item" href="{% url 'register' %}">sing up</a>
+                <a class="site-item" href="{% url 'register' %}">Sign up</a>
                 <a href="#">Forget Password ?</a>
             </div>
 
             <!-- ปุ่มการส่งข้อมูล -->
             <button type="submit" class="submit-button">Login</button>
+        </form>
     </div>
 
 </body>

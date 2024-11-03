@@ -14,19 +14,22 @@ from RegCN.models import QuotaRequest
 
 
 def register(request: HttpRequest):
+    form = RegisterForm()
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()  # บันทึกข้อมูลผู้ใช้ใหม่ลงในฐานข้อมูล
             username = form.cleaned_data.get("username")
             messages.success(request, f"Account created for {username}!")
-            return HttpResponseRedirect(reverse("home"))
-        else:
-            form = RegisterForm()
+            return HttpResponseRedirect(reverse("home_page:home"))
 
-    form = RegisterForm()
     context = {"form": form}
     return render(request, "registration/register.html", context)
+
+
+def student_list(request):
+    students = Student.objects.all()  # ดึงข้อมูลนักเรียนทั้งหมด
+    return render(request, "registration/student_list.html", {"students": students})
 
 
 def login_view(request):
@@ -36,7 +39,11 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(reverse("home"))  # Redirect ไปยังหน้า home
+            next_url = request.GET.get("next")
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect(reverse("home"))
         else:
             return render(
                 request, "login.html", {"error": "Invalid username or password"}
@@ -56,39 +63,21 @@ def dashboard(request: HttpRequest):
     quota_requests = None
     try:
         student = Student.objects.get(user=request.user)
-        quota_requests = QuotaRequest.objects.filter(student=student.user)  # ข้อมูลการลงทะเบียนวิชา
-        subjects = [quota_request.subject for quota_request in quota_requests]  # ดึงวิชาที่ผู้ใช้ลงทะเบียน
+        quota_requests = QuotaRequest.objects.filter(
+            student=student.user
+        )  # ข้อมูลการลงทะเบียนวิชา
+        subjects = [
+            quota_request.subject for quota_request in quota_requests
+        ]  # ดึงวิชาที่ผู้ใช้ลงทะเบียน
     except Student.DoesNotExist:
         student = None  # กรณีไม่มีข้อมูล Student
         subjects = []
 
-    return render(request, "registration/dashboard.html", {"student": student, 'quota_requests': quota_requests, 'subjects': subjects})
-
-
-@login_required
-def create_student(request):
-    if request.method == "POST":
-        user = request.user  # ดึงข้อมูล User ที่ล็อกอินอยู่
-        student_id = request.POST["student_id"]
-        # สร้างข้อมูล Student เชื่อมกับ User
-        student = Student.objects.create(
-            user=user,
-            student_id=student_id,
-            first_name=request.POST["first_name"],
-            last_name=request.POST["last_name"],
-            date_of_birth=request.POST["date_of_birth"],
-            phone_number=request.POST["phone_number"],
-            address=request.POST["address"],
-            gender=request.POST["gender"],
-            faculty=request.POST["faculty"],
-            major=request.POST["major"],
-            year_level=request.POST["year_level"],
-        )
-        student.save()
-        return redirect(
-            "student_list"
-        )  # redirect ไปยังหน้ารายการนักเรียนหลังจากบันทึกข้อมูลสำเร็จ
-    return render(request, "registration/create_student.html")
+    return render(
+        request,
+        "registration/dashboard.html",
+        {"student": student, "quota_requests": quota_requests, "subjects": subjects},
+    )
 
 
 @login_required

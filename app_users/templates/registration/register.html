@@ -36,6 +36,11 @@
             margin: 10px 0;
         }
 
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
         .btn {
             background-color: #4CAF50;
             color: white;
@@ -57,7 +62,19 @@
         <h2>ลงทะเบียน</h2>
         <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+            <div>
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                <div class="error">
+                    {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
             <button type="submit" class="btn">ลงทะเบียน</button>
         </form>
     </div>
