@@ -1,4 +1,7 @@
 name: Testing
+env:
+        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 on: push
 
