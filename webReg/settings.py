@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "home_page.apps.HomePageConfig",
     "RegCN.apps.RegcnConfig",
     "app_users.apps.AppUsersConfig",
-    "registration.apps.RegistrationConfig",
+    
 ]
 
 MIDDLEWARE = [
@@ -135,3 +135,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "home_page:home"
 LOGOUT_REDIRECT_URL = "login"
 LOGIN_URL = "login"
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: "error",  # หรือใช้ custom CSS class สำหรับ error
+}

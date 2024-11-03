@@ -142,15 +142,22 @@
         <!-- ฟอร์มข้อมูลนักศึกษา -->
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            {{ form.as_p }}
-            {% if error %}
-                <p style="color: red;">{{ error }}</p>
-            {% endif %}
+            <div class="error">
+                {% if error %}
+                <p>{{ error }}</p>
+                {% endif %}
+            </div>
 
             <div class="left-section">
                 <a href="{% url 'home_page:home' %}">หน้าหลัก</a>
             </div>
             <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+
             <table>
                 <tr>
                     <th>Username</th>

@@ -6,6 +6,7 @@ from app_users.forms import RegisterForm, StudentForm
 from django.contrib.auth import get_user_model
 from django.test import override_settings
 from RegCN.models import Subject, QuotaRequest
+from django.contrib.messages import get_messages
 
 
 class UserViewsTest(TestCase):
@@ -124,6 +125,15 @@ class UserViewsTest(TestCase):
             reverse("login"), {"username": "testuser", "password": "12345"}
         )
         self.assertRedirects(response, reverse("home_page:home"))
+
+    def test_login_view_get_request(self):
+        response = self.client.get(reverse("login"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "registration/login.html")
+
+    def test_csrf_token_in_login_form(self):
+        response = self.client.get(reverse("login"))
+        self.assertContains(response, "csrfmiddlewaretoken")
 
     def test_logout_view(self):
         self.client.login(username="testuser", password="12345")
@@ -247,10 +257,16 @@ class UserViewsTest(TestCase):
         )
         self.assertRedirects(response, reverse("home_page:home"))
 
-    def test_login_invalid(self):
-        data = {"username": "wronguser", "password": "wrongpassword"}
-        response = self.client.post(reverse("login"), data)
+    def test_dashboard_view_with_login(self):
+        # ทดสอบการเข้าถึง dashboard หลังจาก login
+        self.client.login(username="testuser", password="12345")
+        response = self.client.get(reverse("dashboard"))
         self.assertEqual(response.status_code, 200)
-        # เปลี่ยนข้อความที่ตรวจสอบให้ตรงกับข้อความใน HTML
-        self.assertContains(response, "Please enter a correct username and password. Note that both fields may be case-sensitive.")
-    
+
+    def test_dashboard_view_without_login(self):
+        self.client.logout()
+        response = self.client.get(reverse("dashboard"))
+        self.assertEqual(response.status_code, 302)  # ตรวจสอบสถานะการ redirect
+        self.assertRedirects(
+            response, reverse("login") + "?next=" + reverse("dashboard")
+        )

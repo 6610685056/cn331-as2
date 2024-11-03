@@ -34,28 +34,27 @@ def student_list(request):
 
 def login_view(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
+        username = request.POST.get("username")
+        password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            next_url = request.GET.get("next")
+            next_url = request.POST.get("next")  # แก้เป็น POST
             if next_url:
                 return redirect(next_url)
-            else:
-                return redirect(reverse("home"))
+            return redirect(reverse("home_page:home"))
         else:
-            return render(
-                request, "login.html", {"error": "Invalid username or password"}
+            messages.error(
+                request,
+                "Please enter a correct username and password. Note that both fields may be case-sensitive.",
             )
-    else:
-        return render(request, "login.html")
+    return render(request, "login.html")
 
 
 def logout_view(request):
     if request.method == "POST":
         logout(request)
-        return redirect("home")
+        return redirect("home_page:home")
 
 
 @login_required
